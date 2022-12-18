@@ -14,14 +14,22 @@ class Index(TemplateView):
     template_name = 'index.html'
 
 
+class About(TemplateView):
+    template_name = 'about.html'
+
+
+class AddProduct(LoginRequiredMixin, CreateView):
+    template_name = 'add_product.html'
+    model = Product
+    login_url = '/login'
+    success_url = '/products'
+    form_class = ProductForm
+
+
 class Products(ListView):
     model = Product
     template_name = 'products.html'
     context_object_name = 'products'
-
-
-class About(TemplateView):
-    template_name = 'about.html'
 
 
 class Login(LoginView):
@@ -32,11 +40,3 @@ class Login(LoginView):
 
 class Contact(TemplateView):
     template_name = 'contacts.html'
-
-
-class AddProduct(LoginRequiredMixin, CreateView):
-    template_name = 'add_product.html'
-    model = Product
-    login_url = '/login'
-    success_url = '/products'
-    form_class = ProductForm
